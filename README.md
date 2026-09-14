@@ -27,7 +27,7 @@ of her powers in the process, and could no longer leave, or do much else
 than wander and wonder among the remains.
 
 After an untold amount of time had passed, quite unexpectedly, a stranger
-found their way into her dimension. The stranger arrived carrying a record
+found their way into her dimension. The stranger arrived carrying a book
 and asking whether she wanted to follow them.
 
 How they managed to find her is a question she has no answer to. Alas,
