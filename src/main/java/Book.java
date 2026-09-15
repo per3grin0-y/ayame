@@ -101,6 +101,34 @@ public class Book {
         }
     }
 
+    public LinkedHashSet<String> getAuthors(){
+        LinkedHashSet<String> authorSet = new LinkedHashSet<>(this.authors);
+        return authorSet;
+    }
+
+    public void addAuthor(String author){
+        if (isEmpty(author)) throw new IllegalArgumentException("Author must not be empty or null");
+        if (!authors.add(author)) throw new IllegalArgumentException("Author was already added");
+    }
+
+    public void removeAuthor(String author){
+        if (!authors.remove(author)) throw new IllegalArgumentException("Author does not exist");
+    }
+
+    public HashSet<String >getTags(){
+        HashSet<String> tagSet = new HashSet<>(this.tags);
+        return tagSet;
+    }
+
+    public void addTag(String tag){
+        if (isEmpty(tag)) throw new IllegalArgumentException("Tag must not be empty or null");
+        if (!tags.add(tag)) throw new IllegalArgumentException("Tag was already added");
+    }
+
+    public void removeTag(String tag){
+        if (!tags.remove(tag)) throw new IllegalArgumentException("Tag does not exist");
+    }
+
     private boolean isEmpty(String input) {
         return input == null || input.isEmpty();
     }
