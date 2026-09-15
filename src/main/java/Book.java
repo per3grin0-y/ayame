@@ -15,8 +15,8 @@ public class Book {
     private ArrayList<Note> notes; //Custom type to be created later
 
     public Book(String id, String title) {
-        if (isEmpty(id)) throw new IllegalArgumentException("ID must not be null");
-        if (isEmpty(title)) throw new IllegalArgumentException("Title must not be null");
+        if (isEmptyOrNull(id)) throw new IllegalArgumentException("ID must not be null");
+        if (isEmptyOrNull(title)) throw new IllegalArgumentException("Title must not be null");
         this.id = id;
         this.title = title;
         this.isbn = null;
@@ -38,7 +38,7 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        if (isEmpty(title)) throw new IllegalArgumentException("Title must not be null");
+        if (isEmptyOrNull(title)) throw new IllegalArgumentException("Title must not be null");
         this.title = title;
     }
 
@@ -107,7 +107,7 @@ public class Book {
     }
 
     public void addAuthor(String author){
-        if (isEmpty(author)) throw new IllegalArgumentException("Author must not be empty or null");
+        if (isEmptyOrNull(author)) throw new IllegalArgumentException("Author must not be empty or null");
         if (!authors.add(author)) throw new IllegalArgumentException("Author was already added");
     }
 
@@ -121,7 +121,7 @@ public class Book {
     }
 
     public void addTag(String tag){
-        if (isEmpty(tag)) throw new IllegalArgumentException("Tag must not be empty or null");
+        if (isEmptyOrNull(tag)) throw new IllegalArgumentException("Tag must not be empty or null");
         if (!tags.add(tag)) throw new IllegalArgumentException("Tag was already added");
     }
 
@@ -129,7 +129,7 @@ public class Book {
         if (!tags.remove(tag)) throw new IllegalArgumentException("Tag does not exist");
     }
 
-    private boolean isEmpty(String input) {
+    private boolean isEmptyOrNull(String input) {
         return input == null || input.isEmpty();
     }
 }
