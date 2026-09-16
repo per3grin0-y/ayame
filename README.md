@@ -35,15 +35,24 @@ one book was not much to work with, but it was a beginning.
 
 ### Roadmap
 
-#### 1. Building the Book class
+#### 1. Book class
 
-- [ ] Nail down every field and whether it holds one value or many values. 
-   1. One: id, title, isbn, pages, pubDate, description, rating
-   2. Many: authors, tags, notes
-- [ ] Pick the right Java collection type for the "many" fields. 
-   1. authors: LinkedHashSet (order and no-dupes)
-   2. tags: HashSet (no-dupes)
-   3. notes: ArrayList (order, no dupes)
-- [ ] Design the constructor(s).
-- [ ] Write getters/setters.
-- [ ] Decide on equals(), hashCode(), toString().
+- [X] Fields
+- [X] Constructor(s). 
+- [X] Getters/setters.
+- [X] Add/remove methods for authors and tags.
+- [ ] Add/remove methods for notes
+- [ ] toString().
+
+#### 2. PartialDate class
+- [X] Fields
+- [X] Constructor(s).
+- [X] Getters/setters.
+- [X] Comparable
+
+#### 3. Note class
+- [ ] Fields
+- [ ] Constructor(s).
+- [ ] Getters/setters.
+- [ ] Add/remove methods for tags.
+- [ ] toString().
