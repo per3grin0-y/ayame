@@ -147,6 +147,30 @@ public class Book {
     }
   }
 
+  public PartialDate getPubDate() {
+    return this.pubDate;
+  }
+
+  public void setPubDate(PartialDate date) {
+    this.pubDate = date;
+  }
+
+  public ArrayList<Note> getNotes() {
+    ArrayList<Note> noteArrayList = new ArrayList<>(this.notes);
+    return noteArrayList;
+  }
+
+  public void addNote(Note note) {
+    if (note == null) {
+      throw new IllegalArgumentException("Note must not be null");
+    }
+    notes.add(note);
+  }
+
+  public void removeNote(int index) {
+    notes.remove(index);
+  }
+
   private boolean isEmptyOrNull(String input) {
     return input == null || input.isEmpty();
   }
