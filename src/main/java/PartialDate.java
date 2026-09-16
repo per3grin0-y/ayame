@@ -1,6 +1,9 @@
 import java.time.Year;
+import java.util.Comparator;
 
-public class PartialDate {
+public class PartialDate implements Comparable<PartialDate> {
+    private static final Comparator<Integer> byMonth = Comparator.nullsFirst(Comparator.<Integer>naturalOrder());
+    private static final Comparator<Integer> byDay = Comparator.nullsFirst(Comparator.<Integer>naturalOrder());
     private int year;
     private Integer month;
     private Integer day;
@@ -15,6 +18,7 @@ public class PartialDate {
         this.day = day;
     }
 
+
     public PartialDate(int year, Integer month) {
         this(year, month, null);
     }
@@ -22,7 +26,6 @@ public class PartialDate {
     public PartialDate(int year) {
         this(year, null, null);
     }
-
 
     public Integer getYear() {
         return this.year;
@@ -72,5 +75,16 @@ public class PartialDate {
     private void checkDayHasMonth(Integer month, Integer day) {
         if (month == null && day != null)
             throw new IllegalArgumentException("Cannot have a day without a month");
+    }
+
+    @Override
+    public int compareTo(PartialDate other) {
+        int yearDiff = this.year - other.getYear();
+        if (yearDiff != 0) return yearDiff;
+
+        int monthDiff = byMonth.compare(this.month, other.getMonth());
+        if (monthDiff != 0) return monthDiff;
+
+        return byDay.compare(this.day, other.getDay());
     }
 }
