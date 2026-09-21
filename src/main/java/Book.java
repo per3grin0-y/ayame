@@ -65,9 +65,8 @@ public class Book {
     this.title = title;
   }
 
-  public LinkedHashSet<String> getAuthors() {
-    LinkedHashSet<String> authorSet = new LinkedHashSet<>(this.authors);
-    return authorSet;
+  public LinkedHashSet<String> getAuthors() {;
+    return new LinkedHashSet<>(this.authors);
   }
 
   public void addAuthor(String author) {
@@ -98,7 +97,6 @@ public class Book {
       this.description = description;
     }
   }
-
 
   public Integer getRating() {
     return this.rating;
@@ -136,9 +134,8 @@ public class Book {
     }
   }
 
-  public HashSet<String> getTags() {
-    HashSet<String> tagSet = new HashSet<>(this.tags);
-    return tagSet;
+  public HashSet<String> getTags() {;
+    return new HashSet<>(this.tags);
   }
 
   public void addTag(String tag) {
@@ -156,9 +153,8 @@ public class Book {
     }
   }
 
-  public ArrayList<Note> getNotes() {
-    ArrayList<Note> noteArrayList = new ArrayList<>(this.notes);
-    return noteArrayList;
+  public ArrayList<Note> getNotes() {;
+    return new ArrayList<>(this.notes);
   }
 
   public void addNote(Note note) {

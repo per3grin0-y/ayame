@@ -43,9 +43,8 @@ public class Note {
     return this.date;
   }
 
-  public HashSet<String> getTags() {
-    HashSet<String> tagSet = new HashSet<>(this.tags);
-    return tagSet;
+  public HashSet<String> getTags() {;
+    return new HashSet<>(this.tags);
   }
 
   public void addTag(String tag) {
