@@ -4,9 +4,9 @@ import java.util.Comparator;
 public class PartialDate implements Comparable<PartialDate> {
   private static final Comparator<Integer> byMonth = Comparator.nullsFirst(Comparator.naturalOrder());
   private static final Comparator<Integer> byDay = Comparator.nullsFirst(Comparator.naturalOrder());
-  private int year;
-  private Integer month;
-  private Integer day;
+  private final int year;
+  private final Integer month;
+  private final Integer day;
 
   public PartialDate(int year, Integer month, Integer day) {
     checkYearBoundary(year);
@@ -30,29 +30,12 @@ public class PartialDate implements Comparable<PartialDate> {
     return this.year;
   }
 
-  public void setYear(int year) {
-    checkYearBoundary(year);
-    this.year = year;
-  }
-
   public Integer getMonth() {
     return this.month;
   }
 
-  public void setMonth(Integer month) {
-    checkMonthBoundary(month);
-    checkDayHasMonth(month, this.day);
-    this.month = month;
-  }
-
   public Integer getDay() {
     return this.day;
-  }
-
-  public void setDay(Integer day) {
-    checkDayBoundary(day);
-    checkDayHasMonth(this.month, day);
-    this.day = day;
   }
 
   private void checkYearBoundary(int year) {
