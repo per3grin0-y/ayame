@@ -65,7 +65,7 @@ public class Book {
     this.title = title;
   }
 
-  public LinkedHashSet<String> getAuthors() {;
+  public LinkedHashSet<String> getAuthors() {
     return new LinkedHashSet<>(this.authors);
   }
 
@@ -134,7 +134,7 @@ public class Book {
     }
   }
 
-  public HashSet<String> getTags() {;
+  public HashSet<String> getTags() {
     return new HashSet<>(this.tags);
   }
 
@@ -153,7 +153,7 @@ public class Book {
     }
   }
 
-  public ArrayList<Note> getNotes() {;
+  public ArrayList<Note> getNotes() {
     return new ArrayList<>(this.notes);
   }
 
@@ -170,5 +170,62 @@ public class Book {
 
   private boolean isEmptyOrNull(String input) {
     return input == null || input.isEmpty();
+  }
+
+  @Override
+  public String toString() {
+    String isbn = "", authors = "", description = "", rating = "", pages = "", pubDate = "",
+        tags = "—", notes = "—";
+
+    if (this.isbn != null) {
+      isbn = " • " + this.isbn;
+    }
+
+    if (!this.authors.isEmpty()) {
+      switch (this.authors.size()) {
+        case 1 -> authors = ", by " + this.authors.getFirst();
+        case 2 -> authors = ", by " + String.join(" and ", this.authors);
+        default -> authors = ", by " + this.authors.getFirst() + " et al.";
+      }
+    }
+
+    if (this.description != null) {
+      description = this.description;
+    }
+
+    if (this.rating != null) {
+      rating = this.rating + "/5";
+    }
+
+    if (this.pages != null) {
+      if (!rating.isEmpty()) {
+        pages = " • " + this.pages + " pp";
+      } else {
+        pages = this.pages + " pp";
+      }
+    }
+
+    if (this.pubDate != null){
+      if (!rating.isEmpty() || !pages.isEmpty()){
+        pubDate = " • " + this.pubDate;
+      } else {
+        pubDate = String.valueOf(this.pubDate);
+      }
+    }
+
+    if (!this.tags.isEmpty()){
+      tags = String.join(", ", this.tags);
+    }
+
+    if (!this.notes.isEmpty()){
+      notes = String.valueOf(this.notes.size());
+    }
+    return
+        this.id + isbn + "\n\n"
+        + this.title + authors + "\n"
+        + description + "\n\n"
+        + rating + pages + pubDate + "\n\n"
+        + "Tags: " + tags + "\n"
+        + "Notes: " + notes;
   }
 }

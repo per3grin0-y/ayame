@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 public class Note {
@@ -66,5 +67,20 @@ public class Note {
     return input == null || input.isEmpty();
   }
 
+  public String toString(){
+    String title = "", tags = "";
+
+    if (!this.tags.isEmpty()){
+      tags = " [" + String.join(", ", this.tags) + "]";
+    }
+
+    if (this.title != null) {
+      title = ", " + this.title;
+    }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    return
+        this.date.format(formatter) + title + tags + ": " + this.body + "\n";
+  }
 }
 
