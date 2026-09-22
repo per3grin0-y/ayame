@@ -39,20 +39,20 @@ one book was not much to work with, but it was a beginning.
 
 - [X] Fields
 - [X] Constructor(s). 
-- [X] Getters/setters.
-- [X] Add/remove methods for authors and tags.
-- [ ] Add/remove methods for notes
-- [ ] toString().
+- [X] Accessors.
+- [X] Management methods for authors, tags, and notes.
+- [X] toString().
 
 #### 2. PartialDate class
 - [X] Fields
 - [X] Constructor(s).
-- [X] Getters/setters.
-- [X] Comparable
+- [X] Accessors.
+- [X] Comparable.
+- [X] toString().
 
 #### 3. Note class
-- [ ] Fields
-- [ ] Constructor(s).
-- [ ] Getters/setters.
-- [ ] Add/remove methods for tags.
-- [ ] toString().
+- [X] Fields
+- [X] Constructor(s).
+- [X] Accessors.
+- [X] Management methods for tags.
+- [X] toString().
