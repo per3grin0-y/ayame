@@ -1,14 +1,18 @@
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.time.Year;
 import java.util.Comparator;
 
+@NullMarked
 public class PartialDate implements Comparable<PartialDate> {
-  private static final Comparator<Integer> byMonth = Comparator.nullsFirst(Comparator.naturalOrder());
-  private static final Comparator<Integer> byDay = Comparator.nullsFirst(Comparator.naturalOrder());
+  private static final Comparator<@Nullable Integer> byMonth = Comparator.nullsFirst(Comparator.naturalOrder());
+  private static final Comparator<@Nullable Integer> byDay = Comparator.nullsFirst(Comparator.naturalOrder());
   private final int year;
-  private final Integer month;
-  private final Integer day;
+  private final @Nullable Integer month;
+  private final @Nullable Integer day;
 
-  public PartialDate(int year, Integer month, Integer day) {
+  public PartialDate(int year, @Nullable Integer month, @Nullable Integer day) {
     checkYearBoundary(year);
     checkMonthBoundary(month);
     checkDayBoundary(day);
@@ -18,7 +22,7 @@ public class PartialDate implements Comparable<PartialDate> {
     this.day = day;
   }
 
-  public PartialDate(int year, Integer month) {
+  public PartialDate(int year, @Nullable Integer month) {
     this(year, month, null);
   }
 
@@ -30,11 +34,11 @@ public class PartialDate implements Comparable<PartialDate> {
     return this.year;
   }
 
-  public Integer getMonth() {
+  public @Nullable Integer getMonth() {
     return this.month;
   }
 
-  public Integer getDay() {
+  public @Nullable Integer getDay() {
     return this.day;
   }
 
@@ -45,19 +49,19 @@ public class PartialDate implements Comparable<PartialDate> {
     }
   }
 
-  private void checkMonthBoundary(Integer month) {
+  private void checkMonthBoundary(@Nullable Integer month) {
     if (month != null && (month < 1 || month > 12)) {
       throw new IllegalArgumentException("Constraint: 1 < month < 12");
     }
   }
 
-  private void checkDayBoundary(Integer day) {
+  private void checkDayBoundary(@Nullable Integer day) {
     if (day != null && (day < 1 || day > 31)) {
       throw new IllegalArgumentException("Constraint: 1 < day < 31");
     }
   }
 
-  private void checkDayHasMonth(Integer month, Integer day) {
+  private void checkDayHasMonth(@Nullable Integer month, @Nullable Integer day) {
     if (month == null && day != null) {
       throw new IllegalArgumentException("Cannot have a day without a month");
     }
@@ -83,7 +87,7 @@ public class PartialDate implements Comparable<PartialDate> {
   public String toString() {
     String year, month, day;
 
-    if (this.year < 10){
+    if (this.year < 10) {
       year = "000" + this.year;
     } else if (this.year < 100) {
       year = "00" + this.year;
@@ -93,21 +97,21 @@ public class PartialDate implements Comparable<PartialDate> {
       year = String.valueOf(this.year);
     }
 
-    if (this.month == null){
+    if (this.month == null) {
       return year;
     }
 
-    if (this.month < 10){
+    if (this.month < 10) {
       month = "0" + this.month;
     } else {
       month = String.valueOf(this.month);
     }
 
-    if (this.day == null){
+    if (this.day == null) {
       return year + "-" + month;
     }
 
-    if (this.day < 10){
+    if (this.day < 10) {
       day = "0" + this.day;
     } else {
       day = String.valueOf(this.day);
