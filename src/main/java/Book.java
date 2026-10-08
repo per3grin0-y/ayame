@@ -1,25 +1,31 @@
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
+@NullMarked
 public class Book {
   private final String id;
-  private String isbn;
+  private @Nullable String isbn;
   private String title;
   private LinkedHashSet<String> authors;
-  private String description;
-  private Integer rating;
-  private Integer pages;
-  private PartialDate pubDate;
+  private @Nullable String description;
+  private @Nullable Integer rating;
+  private @Nullable Integer pages;
+  private @Nullable PartialDate pubDate;
   private HashSet<String> tags;
   private ArrayList<Note> notes;
 
   public Book(String id, String title) {
     if (isEmptyOrNull(id)) {
-      throw new IllegalArgumentException("ID must not be null");
+      throw new IllegalArgumentException("ID must not be empty or null");
     }
     if (isEmptyOrNull(title)) {
-      throw new IllegalArgumentException("Title must not be null");
+      throw new IllegalArgumentException("Title must not be empty or null");
     }
     this.id = id;
     this.isbn = null;
@@ -37,11 +43,11 @@ public class Book {
     return this.id;
   }
 
-  public String getIsbn() {
+  public @Nullable String getIsbn() {
     return this.isbn;
   }
 
-  public void setIsbn(String isbn) {
+  public void setIsbn(@Nullable String isbn) {
     if (isbn == null) {
       this.isbn = null;
     } else {
@@ -60,13 +66,13 @@ public class Book {
 
   public void setTitle(String title) {
     if (isEmptyOrNull(title)) {
-      throw new IllegalArgumentException("Title must not be null");
+      throw new IllegalArgumentException("Title must not be empty or null");
     }
     this.title = title;
   }
 
-  public LinkedHashSet<String> getAuthors() {
-    return new LinkedHashSet<>(this.authors);
+  public Set<String> getAuthors() {
+    return Collections.unmodifiableSet(this.authors);
   }
 
   public void addAuthor(String author) {
@@ -84,11 +90,11 @@ public class Book {
     }
   }
 
-  public String getDescription() {
+  public @Nullable String getDescription() {
     return this.description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(@Nullable String description) {
     if (description == null) {
       this.description = null;
     } else if (description.isEmpty()) {
@@ -98,11 +104,11 @@ public class Book {
     }
   }
 
-  public Integer getRating() {
+  public @Nullable Integer getRating() {
     return this.rating;
   }
 
-  public void setRating(Integer rating) {
+  public void setRating(@Nullable Integer rating) {
     if (rating == null) {
       this.rating = null;
     } else if (rating >= 1 && rating <= 5) {
@@ -112,19 +118,19 @@ public class Book {
     }
   }
 
-  public PartialDate getPubDate() {
+  public @Nullable PartialDate getPubDate() {
     return this.pubDate;
   }
 
-  public void setPubDate(PartialDate date) {
+  public void setPubDate(@Nullable PartialDate date) {
     this.pubDate = date;
   }
 
-  public Integer getPages() {
+  public @Nullable Integer getPages() {
     return this.pages;
   }
 
-  public void setPages(Integer pages) {
+  public void setPages(@Nullable Integer pages) {
     if (pages == null) {
       this.pages = null;
     } else if (pages > 0) {
@@ -134,8 +140,8 @@ public class Book {
     }
   }
 
-  public HashSet<String> getTags() {
-    return new HashSet<>(this.tags);
+  public Set<String> getTags() {
+    return Collections.unmodifiableSet(this.tags);
   }
 
   public void addTag(String tag) {
@@ -168,7 +174,7 @@ public class Book {
     notes.remove(index);
   }
 
-  private boolean isEmptyOrNull(String input) {
+  private boolean isEmptyOrNull(@Nullable String input) {
     return input == null || input.isEmpty();
   }
 
@@ -205,27 +211,28 @@ public class Book {
       }
     }
 
-    if (this.pubDate != null){
-      if (!rating.isEmpty() || !pages.isEmpty()){
+    if (this.pubDate != null) {
+      if (!rating.isEmpty() || !pages.isEmpty()) {
         pubDate = " • " + this.pubDate;
       } else {
         pubDate = String.valueOf(this.pubDate);
       }
     }
 
-    if (!this.tags.isEmpty()){
+    if (!this.tags.isEmpty()) {
       tags = String.join(", ", this.tags);
     }
 
-    if (!this.notes.isEmpty()){
+    if (!this.notes.isEmpty()) {
       notes = String.valueOf(this.notes.size());
     }
+
     return
         this.id + isbn + "\n\n"
-        + this.title + authors + "\n"
-        + description + "\n\n"
-        + rating + pages + pubDate + "\n\n"
-        + "Tags: " + tags + "\n"
-        + "Notes: " + notes;
+            + this.title + authors + "\n"
+            + description + "\n\n"
+            + rating + pages + pubDate + "\n\n"
+            + "Tags: " + tags + "\n"
+            + "Notes: " + notes;
   }
 }

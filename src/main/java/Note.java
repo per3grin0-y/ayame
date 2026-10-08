@@ -1,10 +1,14 @@
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
+@NullMarked
 public class Note {
   private final LocalDateTime date;
-  private String title;
+  private @Nullable String title;
   private String body;
   private HashSet<String> tags;
 
@@ -18,11 +22,11 @@ public class Note {
     this.tags = new HashSet<>();
   }
 
-  public String getTitle() {
+  public @Nullable String getTitle() {
     return this.title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(@Nullable String title) {
     if (title != null && title.isEmpty()) {
         throw new IllegalArgumentException("Title must no be empty");
       }
@@ -35,7 +39,7 @@ public class Note {
 
   public void setBody(String body) {
     if (isEmptyOrNull(body)) {
-      throw new IllegalArgumentException("Body must no be empty or null");
+      throw new IllegalArgumentException("Body must not be empty or null");
     }
     this.body = body;
   }
@@ -44,7 +48,7 @@ public class Note {
     return this.date;
   }
 
-  public HashSet<String> getTags() {;
+  public HashSet<String> getTags() {
     return new HashSet<>(this.tags);
   }
 
@@ -63,7 +67,7 @@ public class Note {
     }
   }
 
-  private boolean isEmptyOrNull(String input) {
+  private boolean isEmptyOrNull(@Nullable String input) {
     return input == null || input.isEmpty();
   }
 
