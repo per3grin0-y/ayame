@@ -43,9 +43,11 @@ public class Library {
     return id;
   }
 
-  public boolean release(String id) {
-    int[] parsed = checkId(id);
-    return this.library.get(parsed[0] - 1).release(id, parsed[1]);
+  public void release(String id) {
+    int[] parsed = dissectId(id);
+    if (!this.library.get(parsed[0] - 1).release(id, parsed[1])) {
+      throw new IllegalArgumentException("ID is not shelved: " + id);
+    }
   }
 
   /**
@@ -65,7 +67,7 @@ public class Library {
     return new int[]{this.library.size(), slot[0], slot[1]};
   }
 
-  private int[] checkId(String id) {
+  private int[] dissectId(String id) {
     if (id == null) {
       throw new IllegalArgumentException("ID must not be null");
     }
@@ -91,5 +93,9 @@ public class Library {
           + ". Input: " + slot);
     }
     return new int[]{section, shelf, slot};
+  }
+
+  public void validateId(String id) {
+    dissectId(id);
   }
 }

@@ -38,19 +38,14 @@ public class LibraryTest {
       ids[i] = lib.autoShelve();
     }
     for (int i = 0; i < 1000; i++){
-      assertTrue(lib.release(ids[i]));
+      lib.release(ids[i]);
     }
   }
 
   @Test
-  void releaseShelvedIdReturnsTrue() {
-    String s = lib.autoShelve();
-    assertTrue(lib.release(s));
-  }
-
-  @Test
-  void releaseUnshelvedIdReturnsFalse() {
-    assertFalse(lib.release("AYA.S1.S1.S125"));
+  void releaseUnshelvedIdThrows() {
+    IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> lib.release("AYA.S1.S1.S001"));
+    assertTrue(e.getMessage().contains("ID is not shelved"));
   }
 
   @Test
@@ -90,9 +85,10 @@ public class LibraryTest {
   }
 
   @Test
-  void releaseTwiceReturnsFalse() {
+  void releaseTwiceThrows() {
     String s = lib.autoShelve();
     lib.release(s);
-    assertFalse(lib.release(s));
+    IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> lib.release(s));
+    assertTrue(e.getMessage().contains("ID is not shelved"));
   }
 }
