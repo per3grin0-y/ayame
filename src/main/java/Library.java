@@ -5,8 +5,11 @@ import java.util.regex.Pattern;
 public class Library {
   private static final String ID_PREFIX = "AYA";
   private static final String DATA_MARKER = "S";
-  private static final Pattern FORMAT = Pattern.compile(ID_PREFIX + "\\." + DATA_MARKER
-      + "(\\d{1,9})\\." + DATA_MARKER + "(\\d{1,9})\\." + DATA_MARKER + "(\\d{3})");
+  private static final Pattern FORMAT = Pattern.compile(
+      ID_PREFIX
+          + "\\." + DATA_MARKER + "([1-9]\\d{0,8})"
+          + "\\." + DATA_MARKER + "([1-9])"
+          + "\\." + DATA_MARKER + "((?!000)\\d{3})");
   private ArrayList<Section> library;
 
   public Library() {
@@ -42,8 +45,7 @@ public class Library {
 
   public boolean release(String id) {
     int[] parsed = checkId(id);
-    String canonical = buildId(parsed);
-    return this.library.get(parsed[0] - 1).release(canonical, parsed[1]);
+    return this.library.get(parsed[0] - 1).release(id, parsed[1]);
   }
 
   /**
@@ -74,18 +76,18 @@ public class Library {
           + DATA_MARKER + "1" + "." + DATA_MARKER + "067");
     }
     int section = Integer.parseInt(m.group(1));
-    if (section <= 0 || section > this.library.size()) {
-      throw new IllegalArgumentException("Section must be between 1 and " + this.library.size()
+    if (section > this.library.size()) {
+      throw new IllegalArgumentException("Section must be at most" + this.library.size()
           + ". Input: " + section);
     }
     int shelf = Integer.parseInt(m.group(2));
-    if (shelf < 1 || shelf > Section.SECTION_MAX) {
-      throw new IllegalArgumentException("Shelf must be between 1 and " + Section.SECTION_MAX
+    if (shelf > Section.SECTION_MAX) {
+      throw new IllegalArgumentException("Shelf must be at most " + Section.SECTION_MAX
           + ". Input: " + shelf);
     }
     int slot = Integer.parseInt(m.group(3));
-    if (slot < 1 || slot > Shelf.SHELF_MAX) {
-      throw new IllegalArgumentException("Slot must be between 1 and " + Shelf.SHELF_MAX
+    if (slot > Shelf.SHELF_MAX) {
+      throw new IllegalArgumentException("Slot must be at most " + Shelf.SHELF_MAX
           + ". Input: " + slot);
     }
     return new int[]{section, shelf, slot};
