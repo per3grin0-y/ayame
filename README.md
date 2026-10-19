@@ -28,8 +28,9 @@ a beginning.
 
 ### Roadmap
 
-**Done**: Maven setup; `Book`, `PartialDate`, and `Note` classes.
+**Done**: Maven setup; core classes (`Book`, `PartialDate`, and `Note`), physical library model (`Shelf`, 
+`Section`, and `Library`)
 
-**In progress**: physical library modeling (`Shelf`, `Section`, and `Library` classes).
+**In progress**: test suites
 
-**Next**: `Cataloguer`; test suites; persistence (save/load and spatial ID restoration); UI.
+**Next**: persistence (save/load and location restoration); UI.
